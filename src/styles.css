@@ -1,0 +1,153 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-serif: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-signature: "Great Vibes", "Snell Roundhand", cursive;
+
+  --color-background: #f3efe6;
+  --color-foreground: #1c1917;
+  --color-muted: #e7e0d4;
+  --color-muted-foreground: #57534e;
+  --color-card: #faf8f3;
+  --color-card-foreground: #1c1917;
+  --color-border: #d4cdc0;
+  --color-primary: #1f3a5f;
+  --color-primary-foreground: #f6f3ec;
+  --color-primary-hover: #183049;
+  --color-ring: #1f3a5f;
+  --color-paper: #ffffff;
+  --color-ink: #161616;
+  --color-destructive: #8f2d2d;
+  --color-destructive-foreground: #faf7f2;
+  --color-ok: #215845;
+  --color-ok-foreground: #f4f7f4;
+  --color-sidebar: #1a2330;
+  --color-sidebar-foreground: #ece8e0;
+  --color-sidebar-muted: #8b93a0;
+  --color-sidebar-hover: #243040;
+  --color-mark-teal: #0e8a96;
+  --color-mark-teal-foreground: #f4fbfb;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius: 12px;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+.print-exact {
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.letter-sheet {
+  display: flex;
+  flex-direction: column;
+  width: 8.5in;
+  min-height: 11in;
+  box-sizing: border-box;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  padding: 0.55in 0.7in 0.45in;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  line-height: 1.45;
+  box-shadow: 0 18px 50px color-mix(in oklab, var(--color-foreground) 16%, transparent);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.letter-draft::after,
+.letter-void::after {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-28deg);
+  font-family: var(--font-display);
+  font-size: 92px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+.letter-draft::after {
+  content: "DRAFT";
+  color: color-mix(in oklab, var(--color-ink) 8%, transparent);
+}
+
+.letter-void::after {
+  content: "VOID";
+  color: color-mix(in oklab, var(--color-destructive) 18%, transparent);
+}
+
+@media print {
+  @page {
+    size: letter;
+    margin: 0.45in;
+  }
+
+  html,
+  body {
+    background: white !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .letter-stage-wrap {
+    display: none !important;
+  }
+
+  .letter-print-only {
+    display: block !important;
+  }
+
+  .letter-print-only .letter-sheet {
+    width: auto;
+    min-height: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .letter-draft::after,
+  .letter-void::after {
+    display: none;
+  }
+}
+
+.letter-print-only {
+  display: none;
+}
+
+.native-select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%2357534e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px 8px;
+}
