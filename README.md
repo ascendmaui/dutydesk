@@ -8,11 +8,13 @@ Notes and the employee roster stay in the browser on this device. Change the let
 
 ```bash
 npm install
-npm run dev      # local preview
+npm run dev         # local preview (Vite :8080)
 npm run build
 npm run typecheck
+npm test
+npm run lint
 ```
 
 ## Stack
 
-React 19, TanStack Start, Tailwind v4, Zustand.
+React 19, TanStack Start, Tailwind v4, Zustand, TypeScript.
