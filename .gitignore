@@ -16,3 +16,4 @@ AGENTS.md
 startup.sh
 coverage
 *.local
+.node_modules.lock
