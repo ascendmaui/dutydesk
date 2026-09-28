@@ -1,8 +1,10 @@
 {
   "name": "dutydesk",
+  "version": "0.1.0",
   "private": true,
-  "sideEffects": false,
+  "description": "Clinic desk for issuing employee work-status letters with live preview and signatures",
   "type": "module",
+  "sideEffects": false,
   "overrides": {
     "nf3": "0.3.17"
   },
