@@ -63,3 +63,16 @@ A signature is valid if and only if:
 2. `note.signature.fingerprint === noteFingerprint(note)`.
 3. If `kind === "drawn"`, `imageDataUrl` is non-empty.
 4. If `kind === "typed"`, `typedName` is trimmed and non-empty.
+
+---
+
+## 4. Verification Test Matrix & CI Hardening
+
+The test suite in `src/lib/signature.test.ts` executes in CI via `npm test` without external network or database dependencies:
+
+- **Unsigned Note Validation:** Notes without signature return `false`.
+- **Drawn Signature Verification:** Validates base64 image data URL presence and signer metadata match.
+- **Typed Signature Verification:** Validates whitespace trimming and non-empty typed name.
+- **Exhaustive Clinical Field Tamper Detection:** Verifies that mutating *any* of the 13 clinical or administrative note fields immediately breaks fingerprint verification and marks the note invalid.
+- **StaffMark Translation:** Ensures accurate conversion from clinical signature payload to printed staff mark.
+

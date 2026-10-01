@@ -150,3 +150,41 @@ test('staffMarkFromSignature: accurately converts note signature to staff mark',
     typedName: undefined,
   });
 });
+
+test('tamper detection: exhaustive check across all clinical fields', () => {
+  const clinicalFieldsToMutate: Array<[keyof Note, string]> = [
+    ['employeeId', 'emp_999'],
+    ['templateId', 'duty-restriction'],
+    ['natureOfIllness', 'Bacterial infection'],
+    ['datesOfCare', '2026-10-02 to 2026-10-03'],
+    ['comments', 'Altered clearance notes.'],
+    ['restrictions', 'No heavy lifting over 10 lbs.'],
+    ['absenceStart', '2026-09-25'],
+    ['absenceEnd', '2026-10-05'],
+    ['schoolName', 'Clemson University'],
+    ['author', 'Dr. John Doe, MD'],
+    ['authorTitle', 'Chief Medical Officer'],
+    ['serviceDate', '2026-10-05'],
+    ['fin', 'FIN-00000'],
+  ];
+
+  for (const [field, tamperedVal] of clinicalFieldsToMutate) {
+    const baseNote = createMockNote();
+    baseNote.signature = makeSignature(baseNote, {
+      kind: 'typed',
+      typedName: 'Dr. Jane Smith, MD',
+    });
+    assert.equal(isSignatureValid(baseNote), true, `Base note should be valid before tampering ${field}`);
+
+    const tamperedNote = {
+      ...baseNote,
+      [field]: tamperedVal,
+    };
+    assert.equal(
+      isSignatureValid(tamperedNote),
+      false,
+      `Mutating ${field} must invalidate clinical signature`
+    );
+  }
+});
+
