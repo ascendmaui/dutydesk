@@ -4,6 +4,10 @@ Clinic desk for issuing employee work-status letters — return-to-work waivers,
 
 Notes and the employee roster stay in the browser on this device. Change the letterhead under **Letterhead** to your clinic name, mark, and signer.
 
+## Documentation
+
+- [Clinical Signature & Document Integrity](docs/SIGNATURE_VERIFICATION.md) — Attestation model, document fingerprinting, and tamper-invalidation invariants.
+
 ## Scripts
 
 ```bash

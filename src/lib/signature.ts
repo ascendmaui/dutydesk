@@ -1,5 +1,5 @@
-import { nowIso } from "./format";
-import type { Note, NoteSignature, SignatureKind, StaffMark } from "./types";
+import { nowIso } from "./format.ts";
+import type { Note, NoteSignature, SignatureKind, StaffMark } from "./types.ts";
 
 export const SIGN_MEANING =
   "I attest this work-status note is complete and accurate, and I am authorized to issue it.";
